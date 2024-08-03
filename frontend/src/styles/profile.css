@@ -1,0 +1,39 @@
+
+.profile-info img{
+    display: flex;
+    justify-content: center;
+    width: 180px;
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.whole-profile-info{
+    display: flex;
+    justify-content: center;
+}
+.info h2{
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.info h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.info h5{
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container{
+    padding: 4px;
+}
+.container h2{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
