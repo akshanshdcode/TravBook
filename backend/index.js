@@ -15,7 +15,7 @@ dotenv.config()
 const app = express()
 const port = process.env.PORT || 8000
 const corsOptions = {
-   origin: 'https://travbook-frontend.vercel.app',
+   origin: process.env.ORIGIN,
    credentials: true
 }
 
