@@ -9,9 +9,10 @@ import { BASE_URL } from '../utils/config'
 
 const Register = () => {
    const [credentials, setCredentials] = useState({
-      userName: undefined,
-      email: undefined,
-      password: undefined
+      username: '',
+      email: '',
+      password: '',
+      role: ''
    })
 
    const {dispatch} = useContext(AuthContext)
@@ -26,19 +27,19 @@ const Register = () => {
 
       try {
          const res = await fetch(`${BASE_URL}/auth/register`, {
-            method:'post',
+            method: 'post',
             headers: {
-               'content-type':'application/json'
+               'content-type': 'application/json'
             },
             body: JSON.stringify(credentials)
          })
          const result = await res.json()
 
-         if(!res.ok) alert(result.message)
+         if (!res.ok) alert(result.message)
 
-         dispatch({type:'REGISTER_SUCCESS'})
+         dispatch({ type: 'REGISTER_SUCCESS' })
          navigate('/login')
-      } catch(err) {
+      } catch (err) {
          alert(err.message)
       }
    }
@@ -67,7 +68,8 @@ const Register = () => {
                               <input type="email" placeholder='Email' id='email' onChange={handleChange} required />
                            </FormGroup>
                            <FormGroup>
-                              <select id='role' style={{padding: '5px',paddingLeft: '4px',fontSize: '14px',borderRadius: '6px',border: '#fff', width: '100%'}} onChange={handleChange} required>
+                              <select id='role' style={{ padding: '5px', paddingLeft: '4px', fontSize: '14px', borderRadius: '6px', border: '#fff', width: '100%' }} onChange={handleChange} required>
+                                 <option value=''>Select Role</option>
                                  <option value='user'>User</option>
                                  <option value='provider'>Provider</option>
                               </select>

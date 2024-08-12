@@ -5,23 +5,36 @@ import jwt from 'jsonwebtoken'
 // user register
 export const register = async (req, res) => {
    try {
-      //hashing password
-      const salt = bcrypt.genSaltSync(10)
-      const hash = bcrypt.hashSync(req.body.password, salt)
-      console.log('role from front end ', req.body.role)
+      const { username, email, password, photo, role } = req.body;
+
+      if (!username || !email || !password || !role) {
+         return res.status(400).json({ success: false, message: "All fields are required" });
+      }
+
+      // Check if user already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+         return res.status(400).json({ success: false, message: "User already exists" });
+      }
+
+      // Hashing password
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+
       const newUser = new User({
-         username: req.body.username,
-         email: req.body.email,
+         username,
+         email,
          password: hash,
-         photo: req.body.photo,
-         role : req.body.role
-      })
+         photo,
+         role
+      });
 
-      await newUser.save()
+      await newUser.save();
 
-      res.status(200).json({ success: true, message: "Successfully created!" })
+      res.status(200).json({ success: true, message: "Successfully created!" });
    } catch (error) {
-      res.status(500).json({ success: false, message: "Failed to create! Try again." })
+      console.error('Error during registration:', error);
+      res.status(500).json({ success: false, message: "Failed to create! Try again." });
    }
 }
 
